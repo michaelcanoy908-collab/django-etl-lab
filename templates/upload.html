@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ETL System - Upload</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 30px;
+            max-width: 450px;
+            width: 100%;
+        }
+        
+        h2 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 24px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .message {
+            background: #fff3cd;
+            color: #856404;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            border-left: 4px solid #ffc107;
+        }
+        
+        .info {
+            background: #e8f0fe;
+            color: #1967d2;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+        
+        .file-input {
+            margin: 20px 0;
+        }
+        
+        .file-input label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #555;
+        }
+        
+        input[type="file"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px dashed #ccc;
+            border-radius: 6px;
+            background: #fafafa;
+            cursor: pointer;
+        }
+        
+        input[type="file"]:hover {
+            border-color: #4CAF50;
+            background: #f9f9f9;
+        }
+        
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+        }
+        
+        button:hover {
+            background: #45a049;
+        }
+        
+        .sample {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 6px;
+            margin-top: 25px;
+            font-size: 12px;
+            font-family: monospace;
+        }
+        
+        .sample strong {
+            color: #4CAF50;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>📊 ETL Pipeline</h2>
+        <div class="subtitle">Extract • Transform • Load</div>
+        
+        {% if message %}
+        <div class="message">
+            ⚠️ {{ message }}
+        </div>
+        {% endif %}
+        
+        <div class="info">
+            💡 Upload CSV with columns: <strong>id, name, course</strong>
+        </div>
+        
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="file-input">
+                <label>📁 Choose CSV File:</label>
+                <input type="file" name="csvfile" accept=".csv" required>
+            </div>
+            <button type="submit">🚀 Run ETL</button>
+        </form>
+        
+        <div class="sample">
+            <strong>📄 Sample CSV Format:</strong><br>
+            id,name,course<br>
+            2023001,Juan Dela Cruz,BSIT<br>
+            2023002,,BSCS<br>
+            2023003,Ana Lopez,
+        </div>
+    </div>
+</body>
+</html>
